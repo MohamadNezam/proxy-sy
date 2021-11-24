@@ -1,0 +1,39 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"lang="en">
+<head>
+    <title>[[${mode}]] User</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="container main-content">
+        <h3 >[[${mode}]] User</h3>
+        <form method="post" action="#" th:action="${user != null} ? '/users/'+${user.id} : '/users'" th:object="${userModel}">
+            <div class="form-row">
+                <div class="col">
+                    <input th:id="firstName" th:name="firstName" type="text" class="form-control" placeholder="First Name" th:value="${user != null} ? ${user.firstName}"/>
+                </div>
+                <div class="col">
+                    <input th:id="lastName" th:name="lastName" type="text" class="form-control" placeholder="Last Name" th:value="${user != null} ? ${user.lastName}"/>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <input th:id="username" th:name="username" type="text" class="form-control" placeholder="Username" th:value="${user != null} ? ${user.username}"/>
+                </div>
+                <div class="col">
+                    <input th:id="password" th:name="password" type="password" class="form-control" placeholder="Password" th:value="${user != null} ? ${user.password}"/>
+                </div>
+            </div>
+
+            <div class="form-row" >
+                <button  type="submit" class="btn btn-primary" th:if="${mode != 'View'}">[[${mode}]]</button>
+            </div>
+        </form>
+        <a th:href="@{/users}">Return to All Users</a>
+    </div>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script th:src="@{/js/table.js}"></script>
+</div>
+</body>
+</html>
