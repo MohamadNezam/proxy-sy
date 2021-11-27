@@ -1,0 +1,68 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<head>
+    <title>Update User</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="container main-content">
+        <h3 >Update </h3>
+
+        <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"/>
+
+        <form method="post" action="#" th:action="${myProfile} == 'USER' ? @{/my-profile} : @{'/users/update/' + ${user.id}}" th:object="${user}">
+            <div th:if="${#fields.hasErrors('global')}">
+                <p class="alert alert-danger" th:each="err : ${#fields.errors('global')}" th:text="${err}"  />
+            </div>
+            <div class="form-row">
+
+                <div class="col">
+                    <label th:for="firstName">First Name</label>
+                    <input  th:field="*{firstName}"   type="text" class="form-control" placeholder="First Name" th:value="${user.firstName}"/>
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
+                </div>
+                <div class="col">
+                    <label th:for="lastName">Last Name</label>
+                    <input  th:field="*{lastName}"  type="text" class="form-control" placeholder="Last Name" th:value="${user != null} ? ${user.lastName}"/>
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label th:for="username">Username</label>
+                    <input  th:field="*{username}"  type="text" class="form-control" placeholder="Username" th:value="${user != null} ? ${user.username}"/>
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">
+                </div>
+                <div class="col">
+                    <label th:for="password">Password</label>
+                    <input  th:field="*{password}"  th:type="password" class="form-control" placeholder="New Password" th:value="${user != null} ? ${user.password}"/>
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+                </div>
+            </div>
+            <div class="form-row" th:if="${myProfile == null}" sec:authorize="hasAuthority('ROLE_ADMIN')">
+                <div class="col">
+                    <label th:for="*{roles}">Select User Roles</label>
+                    <select th:field="*{roles}" class="form-control selectpicker"   multiple="multiple">
+                        <option th:each="role : ${roles}"
+                                th:selected="${user != null} ? ${user.roles.contains(role)}"
+                                th:value="${role.id}"
+                                th:text="${role.name}">Role name</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="form-row" >
+                <button  type="submit" class="btn btn-primary">Update</button>
+            </div>
+        </form>
+        <a th:href="@{/users}">Return to All Users</a>
+    </div>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script th:src="@{/js/table.js}"></script>
+</div>
+</body>
+</html>

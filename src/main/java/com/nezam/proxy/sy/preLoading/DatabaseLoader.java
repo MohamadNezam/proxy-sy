@@ -1,8 +1,10 @@
 package com.nezam.proxy.sy.preLoading;
 
 import com.nezam.proxy.sy.controllers.UserController;
+import com.nezam.proxy.sy.models.Proxy;
 import com.nezam.proxy.sy.models.Role;
 import com.nezam.proxy.sy.models.User;
+import com.nezam.proxy.sy.repository.ProxyRepository;
 import com.nezam.proxy.sy.repository.RoleRepository;
 import com.nezam.proxy.sy.repository.UserRepository;
 import org.slf4j.Logger;
@@ -25,6 +27,9 @@ public class DatabaseLoader implements CommandLineRunner {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private ProxyRepository proxyRepository;
     @Autowired // <3>
     public DatabaseLoader() {
       //  this.repository = repository;
@@ -66,6 +71,17 @@ public class DatabaseLoader implements CommandLineRunner {
         userRepository.save(u2);
       //  logger.info(u1.getId().toString());
       //  logger.info(u1.getRoles().toString());
+
+
+        // *********************************
+        // Add Proxies
+        Proxy.proxyStatues statues = Proxy.proxyStatues.Active;
+        Proxy p1 = new Proxy(u1,"192.168.1.1","5258","sss","ss",statues);
+        Proxy p2 = new Proxy(u1,"192.168.1.2","5258","sss","ss",statues);
+        Proxy p3 = new Proxy(u2,"192.168.1.4","5258","sss","ss",statues);
+        Proxy p4 = new Proxy(u3,"192.168.1.4","5258","sss","ss",statues);
+        proxyRepository.saveAll(Arrays.asList(p1,p2,p3,p4));
+
 
 
 

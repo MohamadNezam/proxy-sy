@@ -45,6 +45,11 @@ public class User {
     )
     private Set<Role> roles = new HashSet<>();
 
+
+
+    @OneToMany(mappedBy="user",cascade={PERSIST, DETACH},fetch = FetchType.EAGER)
+    private Set<Proxy> proxies;
+
     public User() {
     }
 

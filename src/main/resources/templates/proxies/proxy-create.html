@@ -1,0 +1,96 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"lang="en">
+<head>
+    <title>[[${mode}]] User</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="container main-content">
+        <h3 >Create a new proxy</h3>
+
+        <form method="post" action="#" th:action="@{/proxies/create}" th:object="${proxyModel}">
+            <div th:if="${#fields.hasErrors('global')}">
+                <p class="alert alert-danger" th:each="err : ${#fields.errors('global')}" th:text="${err}"  />
+            </div>
+            <div class="form-row">
+                <div class="form-row">
+                    <div class="col">
+                        <label th:for="*{user}">Select User Name</label>
+                        <select th:field="*{user}" class="form-control selectpicker" data-live-search="true">
+                            <option th:each="user : ${users}"
+
+                                    th:value="${user.id}"
+                                    th:text="${user.firstName} + ' ' + ${user.lastName}">Full name</option>
+
+                        </select>
+<!--                        th:selected="${proxy != null} ? ${proxy.user.username.contains(user.username)}"
+
+-->
+                    </div>
+
+                </div>
+                <div class="col">
+<!--                    <label for="fullName">Full Name</label>-->
+<!--                    <input id="fullName" th:field="*{user.firstName}"   type="text" class="form-control" placeholder="First Name" th:value="${user != null} ? ${user.firstName}"/>-->
+<!--                    <p class="alert alert-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">-->
+                </div>
+                <div class="col">
+<!--                    <label th:for="lastName">Last Name</label>-->
+<!--                    <input  th:field="*{lastName}"  type="text" class="form-control" placeholder="Last Name" th:value="${user != null} ? ${user.lastName}"/>-->
+<!--                    <p class="alert alert-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">-->
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label th:for="proxyIP">IP</label>
+                    <input  th:field="*{proxyIP}"  type="text" class="form-control" placeholder="IP Address" th:value="${proxy != null} ? ${proxy.proxyIP}"/>
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('proxyIP')}" th:errors="*{proxyIP}">
+                </div>
+                <div class="col">
+                    <label th:for="proxyPort">Port</label>
+                    <input  th:field="*{proxyPort}"  type="text" class="form-control" placeholder="Port" th:value="${proxy != null} ? ${proxy.proxyPort}"/>
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('proxyPort')}" th:errors="*{proxyPort}">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label th:for="proxyUsername">Username</label>
+                    <input  th:field="*{proxyUsername}"  type="text" class="form-control" placeholder="Username" th:value="${proxy != null} ? ${proxy.proxyUsername}"/>
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('proxyUsername')}" th:errors="*{proxyUsername}">
+                </div>
+                <div class="col">
+                    <label th:for="proxyPassword">Password</label>
+                    <input  th:field="*{proxyPassword}"  type="text" class="form-control" placeholder="Password" th:value="${proxy != null} ? ${proxy.proxyPassword}"/>
+                    <p class="alert alert-danger" th:if="${#fields.hasErrors('proxyPassword')}" th:errors="*{proxyPassword}">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label th:for="*{statues}">Select Proxy Statues</label>
+                    <select th:field="*{statues}" class="form-control selectpicker " data-live-search="true" >
+                        <option th:each="statues : ${proxyStatues}"
+                                th:selected="${proxy != null} ? ${proxy.statues.contains(statues)}"
+                                th:value="${statues}"
+                                th:text="${statues}">statues name</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="form-row" >
+                <button  type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </form>
+        <a th:href="@{/users}">Return to All Users</a>
+    </div>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script th:src="@{/js/table.js}"></script>
+    <script>
+    $('.select2').select2();
+</script>
+</div>
+</body>
+</html>
