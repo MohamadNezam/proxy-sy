@@ -1,11 +1,13 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
     <head th:fragment="head-fragment">
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/>
         <link rel="stylesheet" href="../static/css/site.css" th:href="@{/css/site.css}"/>
+        <script src="https://use.fontawesome.com/b7ee1a7148.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
         <title layout:title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">My Proxy</title>
     </head>
@@ -13,8 +15,25 @@
         <header>
             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
                 <a class="navbar-brand" th:href="@{/index}">My Proxy SY</a>
-                <div class="navbar-nav mr-auto">
-                    <ul class="navbar-nav">
+                <div class="navbar-nav mr-auto" >
+                    <ul class="navbar-nav" >
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/my-profile}">My Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/my-proxies}">My Proxies</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/my-incomes}">My Incomes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/my-invoices}">My Invoices</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav" sec:authorize="hasRole('ADMIN')">
+                        <li class="nav-item" >
+                            <a class="nav-link" th:href="@{/users}">Users</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/proxies}">Proxies</a>
                         </li>
@@ -23,20 +42,6 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/invoices}">Invoices</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/users}">Users</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{admin/proxies}">Proxies</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{admin/incomes}">Incomes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{admin/invoices}">Invoices</a>
                         </li>
                     </ul>
                 </div>
@@ -51,6 +56,7 @@
                     </ul>
                 </div>
             </nav>
+
         </header>
 
         <main role="main">
@@ -65,5 +71,6 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
     </body>
 </html>

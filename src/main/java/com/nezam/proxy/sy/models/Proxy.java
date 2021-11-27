@@ -1,4 +1,4 @@
-package com.nezam.proxy.sy.domains;
+package com.nezam.proxy.sy.models;
 
 import javax.persistence.*;
 

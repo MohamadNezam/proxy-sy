@@ -1,7 +1,7 @@
 package com.nezam.proxy.sy.services;
 
 
-import com.nezam.proxy.sy.domains.User;
+import com.nezam.proxy.sy.models.User;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

@@ -1,11 +1,9 @@
 package com.nezam.proxy.sy.services.impl;
 
-import com.nezam.proxy.sy.domains.User;
+import com.nezam.proxy.sy.models.User;
 import com.nezam.proxy.sy.repository.UserRepository;
 import com.nezam.proxy.sy.services.UserService;
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;

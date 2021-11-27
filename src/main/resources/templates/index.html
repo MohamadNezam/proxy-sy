@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
 <head>
     <title>Home</title>
 </head>
@@ -11,12 +11,37 @@
             <p>You can get your proxies information by sign in</p>
         </div>
         <div class="container">
+            <h2>Welcome</h2>
+            <p>Spring Security Thymeleaf tutorial</p>
+            <div sec:authorize="hasRole('USER')">Text visible to user.</div>
+            <div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>
+            <div sec:authorize="hasAuthority('USER')">hasAuthority Text visible to user.</div>
+            <div sec:authorize="hasAuthority('ADMIN')">hasAuthority visible to admin.</div>
+            <div sec:authorize="hasAuthority('ROLE_USER')">hasAuthority ROLE_ Text visible to user.</div>
+            <div sec:authorize="hasAuthority('ROLE_ADMIN')">hasAuthority ROLE_ visible to admin.</div>
+            <div sec:authorize="isAuthenticated()">
+                Text visible only to authenticated users.
+                Authenticated username:
+                <div sec:authentication="name"></div>
+                Authenticated user roles:
+                <div sec:authentication="principal.authorities"></div>
+                <span sec:authentication="principal.authorities">Roles</span>
+            </div>
+
+
+<!--            <span sec:authentication="name">Username</span>-->
+<!--            <span sec:authentication="principal.authorities">Roles</span>-->
+<!--           <span sec:authentication="principal.grantedAuthoritySet">Roles</span>-->
+<!--            <p sec:authorize access="hasAuthority('ROLE_ADMIN') and hasAuthority('ROLE_USER')" >Must have ROLE_ADMIN and ROLE_USER</p>-->
+<!--            <p sec:authorize access="hasAuthority('ROLE_ADMIN')">Must have ROLE_ADMIN </p>-->
+<!--            <p sec:authorize access="hasAuthority('ADMIN')">Must have ADMIN </p>-->
+<!--            <p sec:authorize access="hasAuthority('ROLE_USER')">Must have ROLE_ADMIN and ROLE_USER</p>-->
+
            <!-- <h3>What do you want to do?</h3>
             <ul>
                 <li><a th:href="@{/guests}">View Guests</a></li>
-            </ul>
-        </div>-->
+            </ul>-->
+        </div>
     </div>
-
 </body>
 </html>

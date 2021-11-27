@@ -1,6 +1,6 @@
 package com.nezam.proxy.sy.controllers.api;
 
-import com.nezam.proxy.sy.domains.User;
+import com.nezam.proxy.sy.models.User;
 import com.nezam.proxy.sy.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
